@@ -1,54 +1,41 @@
 # Virtual Lab
 
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/virtual-lab)](https://badge.fury.io/py/virtual-lab)
-[![PyPI version](https://badge.fury.io/py/virtual-lab.svg)](https://badge.fury.io/py/virtual-lab)
-[![Downloads](https://pepy.tech/badge/virtual-lab)](https://pepy.tech/project/virtual-lab)
-[![license](https://img.shields.io/github/license/zou-group/virtual-lab.svg)](https://github.com/zou-group/virtual-lab/blob/main/LICENSE.txt)
+[Original README](README.orig.md)
 
-![Virtual Lab](https://github.com/zou-group/virtual-lab/raw/main/images/virtual_lab_architecture.png)
+## Getting Started
 
-The **Virtual Lab** is an AI-human collaboration for science research. In the Virtual Lab, a human researcher works with a team of large language model (LLM) **agents** to perform scientific research. Interaction between the human researcher and the LLM agents occurs via a series of **team meetings**, where all the LLM agents discuss a scientific agenda posed by the human researcher, and **individual meetings**, where the human researcher interacts with a single LLM agent to solve a particular scientific task.
+1. Install dependencies:
+    ```bash
+    uv sync
+    ```
 
-Please see our paper [The Virtual Lab of AI agents designs new SARS-CoV-2 nanobodies](https://www.nature.com/articles/s41586-025-09442-9) for more details on the Virtual Lab and an application to nanobody design for SARS-CoV-2.
+2. Create a `.env` file and configure your environment variables
+   > OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
 
-If you use the Virtual Lab, please cite our work as follows:
+3. Run the example script:
+    ```bash
+    uv run pip install -e .
+    uv run pip install -e .[nanobody-design]
+   
+    # open `nanobody_design/run_nanobody_design.ipynb`   
+    # for anyone encountering this project for the first time, 
+    # I suggest reading the source code and running the notebook cell by cell to understand the code.
+    ```
 
-Swanson, K., Wu, W., Bulaong, N.L. et al. The Virtual Lab of AI agents designs new SARS-CoV-2 nanobodies. *Nature* (2025). https://doi.org/10.1038/s41586-025-09442-9
+## Discussion
 
+As with generative AI, the same inputs will almost certainly produce slightly different outputs each run. Therefore, by
+nature, it is hard to replicate the exact same steps as described in the original paper due to stochasticity. In the
+team selection step, my run suggested a structural biologist over an immunologist. When I ran it again, it recommended a
+structural biologist again, this time keeping the immunologist on the team and replacing the machine learning specialist
+described in the paper. There were similar differences throughout each of the project steps, each ballooning on the
+prior difference, and I encountered some errors on my end when running the original code. Namely, I had trouble running
+each of the 5 discussions in parallel, so I modified the code to run them sequentially. Additionally, I chose to sort
+each of the discussion files when creating summaries to correct for the misattribution of certain opinions to certain
+conversations. In addition to the original discussion files saved in the “original” folder, I added the discussion files
+during my first run into the “exp_1” folder to highlight the variation one might encounter when running this project.
 
-## Virtual Lab for nanobody design
+## Future Work
 
-As a real-world demonstration, we applied the Virtual Lab to design nanobodies for one of the latest variants of SARS-CoV-2 (see [nanobody_design](https://github.com/zou-group/virtual-lab/tree/main/nanobody_design)). The Virtual Lab built a computational pipeline consisting of [ESM](https://www.science.org/doi/10.1126/science.ade2574), [AlphaFold-Multimer](https://www.biorxiv.org/content/10.1101/2021.10.04.463034v2), and [Rosetta](https://rosettacommons.org/software/) and used it to design 92 nanobodies that were experimentally validated.
-
-Please see the notebook [nanobody_design/run_nanobody_design.ipynb](https://github.com/zou-group/virtual-lab/blob/main/nanobody_design/run_nanobody_design.ipynb) for an example of how to use the Virtual Lab to create agents and run team and individual meetings.
-
-
-## Installation
-
-The Virtual Lab can be installed using pip or by cloning the repo and installing the required packages. Installation should only take a couple of minutes.
-
-Optionally, first create a conda environment.
-
-```bash
-conda create -y -n virtual_lab python=3.14
-conda activate virtual_lab
-```
-
-The Virtual Lab can be installed via pip.
-
-```bash
-pip install virtual-lab
-```
-
-To install the latest version of the Virtual Lab locally, clone the repo and then install the package.
-
-```bash
-git clone https://github.com/zou-group/virtual_lab.git
-cd virtual_lab
-pip install -e .
-```
-
-
-## OpenAI API Key
-
-The Virtual Lab currently uses GPT-5.2 from OpenAI by default. Save your OpenAI API key as the environment variable `OPENAI_API_KEY`. For example, add `export OPENAI_API_KEY=<your_key>` to your `.bashrc` or `.bash_profile`.
+[TODO](TODO.md)
+ 

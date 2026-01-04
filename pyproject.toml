@@ -16,6 +16,7 @@ readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
 dependencies = [
+    "dotenv>=0.9.9",
     "notebook",
     "openai",
     "requests",
@@ -53,6 +54,13 @@ nanobody-design = [
 
 [tool.hatch.version]
 path = "src/virtual_lab/__about__.py"
+
+[dependency-groups]
+dev = [
+    "pip>=25.3",
+    "pymol-open-source>=3.2.0a0",
+    "pyqt5>=5.15.11",
+]
 
 [project.urls]
 Homepage = "https://github.com/zou-group/virtual-lab"
